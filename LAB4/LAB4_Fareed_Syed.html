@@ -50,11 +50,7 @@
                 test = "1";
             }
 
-            $("#div2").load("demo_test.txt", function (responseTxt, statusTxt, xhr) {
-                // if (statusTxt === "success")
-                //     alert("External content loaded successfully!");
-                // if (statusTxt === "error")
-                //     alert("Error: " + xhr.status + ": " + xhr.statusText);
+            $("#div2").load("description_" + test + ".txt", function (responseTxt, statusTxt, xhr) {
             });
             let $img = $("<img>", {'src': "image_" + test + ".jpg"});
             $('#div1').html($img);
