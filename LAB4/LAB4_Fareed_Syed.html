@@ -33,12 +33,9 @@
         </div>
         <div id="div2">Ryerson University</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript">
+        <script type="text/javascript" src="back_end.js">
             let test = "0"
-
             setInterval(ajax_query, 2000);
-
-            // $(document).ready(function () {
             function ajax_query() {
                 if (test <= "5") {
                     test++;
