@@ -29,9 +29,11 @@
     <div>
     <div id="div1">
         <img id="test_img" alt=""
-             src="image_3.jpg"></div>
-    <br>
-    <div id="div2"><p id="para">AJAX has to update this</p></div>
+             src="image_3.jpg">
+    </div>
+    <div id="div2">
+        <p id="para">AJAX has to update this</p>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
        let test = "0"
@@ -48,7 +50,7 @@
 
             $("#div2").load("description_" + test + ".txt", function (responseTxt, statusTxt, xhr) {
             });
-            let $img = $("<img>", {'src': "image_" + test + ".jpg"}, innerWidth="100", innerHeight="100");
+            let $img = $("<img>", {'src': "image_" + test + ".jpg"});
             $('#div1').html($img);
         }
     </script>
