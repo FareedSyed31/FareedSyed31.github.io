@@ -39,29 +39,29 @@
             let image_4 = "https://media-exp1.licdn.com/dms/image/C560BAQEN_oggJIiNwQ/company-logo_200_200/0/1625243952255?e=1643241600&v=beta&t=lyS1YRP1WWme30vNt7h7hVG-4Oj72Rg36mzSB5ffLmY"
             let test = "0"
 
-            // setInterval(ajax_query, 2000);
-            $(document).ready(function () {
-                // function ajax_query() {
+            setInterval(ajax_query, 2000);
+            // $(document).ready(function () {
+                function ajax_query() {
                 if (test <= "3") {
                     test++;
                 } else {
                     test = "1";
                 }
 
-                $("#div1").load("image_1.jpg", function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt === "success")
-                        alert("External content loaded successfully!");
-                    if (statusTxt === "error")
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                });
+                // $("#div1").load("image_1.jpg", function (responseTxt, statusTxt, xhr) {
+                //     if (statusTxt === "success")
+                //         alert("External content loaded successfully!");
+                //     if (statusTxt === "error")
+                //         alert("Error: " + xhr.status + ": " + xhr.statusText);
+                // }
 
 
-                // let $img = $("<img>", {'src': "image_" + test+".jpg"});
+                let $img = $("<img>", {'src': "image_" + test+".jpg"});
                 // // $('#test_img').html($img);
                 //
-                // $("#test_img").each(function (){
-                //     $(this).html($img)
-                // })
+                $("#test_img").each(function (){
+                    $(this).html($img)
+                })
 
                 // $.ajax({url: "demo.txt", success: function(result){
                 //         $("#test_img").html(result);
@@ -84,7 +84,7 @@
                 //
                 // )
 
-            });
+            }
             // ajax_query();
         </script>
 
