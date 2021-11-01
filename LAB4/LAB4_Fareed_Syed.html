@@ -20,38 +20,38 @@
             <li class="nav-item"><a href="#About" class="nav-link">About</a></li>
             <li class="nav-item"><a href="#Work" class="nav-link">Work Experience</a></li>
             <li class="nav-item"><a href="#Education" class="nav-link">Education</a></li>
-            <!--            <li class="nav-item"><a href="#" class="nav-link">Volunteer Experience</a></li>-->
+            <li class="nav-item"><a href="#" class="nav-link">Volunteer Experience</a></li>
             <!--            <li class="nav-item"><a href="#" class="nav-link">Skills</a></li>-->
             <!--            <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>-->
             <li class="nav-item"><a href="#Contact" class="nav-link">Contact</a></li>
         </ul>
     </div>
     <div>
-    <div id="div1">
-        <img id="test_img" alt=""
-             src="image_1.jpg">
-    </div>
-    <div id="div2">Ryerson University</div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript">
-       let test = "0"
+        <div id="div1">
+            <img id="test_img" alt=""
+                 src="image_1.jpg">
+        </div>
+        <div id="div2">Ryerson University</div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            let test = "0"
 
-        setInterval(ajax_query, 2000);
+            setInterval(ajax_query, 2000);
 
-        // $(document).ready(function () {
-        function ajax_query() {
-            if (test <= "5") {
-                test++;
-            } else {
-                test = "1";
+            // $(document).ready(function () {
+            function ajax_query() {
+                if (test <= "5") {
+                    test++;
+                } else {
+                    test = "1";
+                }
+
+                $("#div2").load("description_" + test + ".txt", function (responseTxt, statusTxt, xhr) {
+                });
+                let $img = $("<img>", {'src': "image_" + test + ".jpg"});
+                $('#div1').html($img);
             }
-
-            $("#div2").load("description_" + test + ".txt", function (responseTxt, statusTxt, xhr) {
-            });
-            let $img = $("<img>", {'src': "image_" + test + ".jpg"});
-            $('#div1').html($img);
-        }
-    </script>
+        </script>
     </div>
 
 
