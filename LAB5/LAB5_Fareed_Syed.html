@@ -201,20 +201,28 @@
     <div class="row my-row">
         <h2 class="headings" id="LAB_5"><b>LAB_5</b></h2>
     </div>
-    <div class="row" id="lab_json">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript">
-            $.ajax({
-                type: "GET",
-                url: "external.json",
-                success: function (response) {
-                    console.log(response);
-                    // $("#lab_json").append("Name: "+response.name)
-                    // +"<br>Year: "+response.year+<br>response.imageURL)
-                }
-            })
-        </script>
+    <div class="row">
+        <div class="col" id="lab_json">
+            <script type="text/javascript">
+                $.ajax({
+                    type: "GET",
+                    url: "external.json",
+                    success: function (response) {
+                        // console.log(response);
+                        $("#lab_json").append("Name: " + response.name +
+                            "<br>Year: " + response.year +
+                            "<br><img src=' response.imageURL' />" +
+                            "<br> Engine: " +
+                            "<br>&numsp;&numsp;Type: " + response.engine.type +
+                            "<br>&numsp;&numsp;Size: " + response.engine.size +
+                            "<br>&numsp;&numsp;Configuration: " + response.engine.configuration +
+                            "<br>Brakes: " +
+                            "<br>&numsp;&numsp;Front: " + response.brakes.front +
+                            "<br>&numsp;&numsp;Back: " + response.engine.back + "")
+                    }
+                })
+            </script>
+        </div>
 
     </div>
 </div>
