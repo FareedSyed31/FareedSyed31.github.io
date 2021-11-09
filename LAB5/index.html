@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sample json test</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        type: "GET",
+        url: "external.json",
+        success: function (response) {
+            console.log("hello world!");
+            // $("#lab_json").append("Name: "+response.name)
+            // +"<br>Year: "+response.year+<br>response.imageURL)
+        }
+    })
+</script>
+
+</body>
+</html>
+

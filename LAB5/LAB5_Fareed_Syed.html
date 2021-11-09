@@ -201,23 +201,21 @@
     <div class="row my-row">
         <h2 class="headings" id="LAB_5"><b>LAB_5</b></h2>
     </div>
-    <div class="row">
-        <div class="col-md-2"><a href="https://www.ryerson.ca/"><img
-                src="https://media-exp1.licdn.com/dms/image/C560BAQEN_oggJIiNwQ/company-logo_200_200/0/1625243952255?e=1643241600&v=beta&t=lyS1YRP1WWme30vNt7h7hVG-4Oj72Rg36mzSB5ffLmY"
-                width="100" height="100" alt="Rye logo"></a></div>
-        <div class="col-md-10">
-            <div class="row">
-                <div class="col"><b>Ryerson University</b></div>
-                <div class="col dates"><b>Sep 2017-Apr 2022 </b></div>
-            </div>
-            <div class="row">
-                <div class="col">Major: Bachelor of Engineering - BE, Mechatronics Engineering</div>
-            </div>
-            <div class="row">
-                <div class="col"> Minor: Computer Science</div>
-            </div>
+    <div class="row" id="lab_json">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $.ajax({
+                type: "GET",
+                url: "external.json",
+                success: function (response) {
+                    console.log(response);
+                    // $("#lab_json").append("Name: "+response.name)
+                    // +"<br>Year: "+response.year+<br>response.imageURL)
+                }
+            })
+        </script>
 
-        </div>
     </div>
 </div>
 <br>
