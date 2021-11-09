@@ -9,6 +9,6 @@
   },
   "brakes": {
     "front": "360 mm" ,
-    "back": "340 mm"
+    "Back": "340 mm"
   }
 }

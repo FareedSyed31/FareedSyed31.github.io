@@ -203,26 +203,30 @@
     </div>
     <div class="row">
         <div class="col" id="lab_json">
+            <b>Loading content as JSON object used from the LAB_5 manual. Later, the following content will be
+            changed to reflect to developers profile.</b><br>
             <script type="text/javascript">
                 $.ajax({
                     type: "GET",
                     url: "external.json",
                     success: function (response) {
                         // console.log(response);
-                        $("#lab_json").append("Name: " + response.name +
-                            "<br>Year: " + response.year +
-                            "<br><img src=' response.imageURL' />" +
-                            "<br> Engine: " +
+                        $("#lab_json").append(
+                            "<br><img src="+ response.imageURL+" /><br>" +
+                            "<br><b>Name: </b>" + response.name +
+                            "<br><b>Year: </b>" + response.year +
+                            "<br><b>Engine: </b>" +
                             "<br>&numsp;&numsp;Type: " + response.engine.type +
                             "<br>&numsp;&numsp;Size: " + response.engine.size +
                             "<br>&numsp;&numsp;Configuration: " + response.engine.configuration +
-                            "<br>Brakes: " +
+                            "<br><b>Brakes: </b>" +
                             "<br>&numsp;&numsp;Front: " + response.brakes.front +
-                            "<br>&numsp;&numsp;Back: " + response.engine.back + "")
+                            "<br>&numsp;&numsp;Back: " + response.brakes.Back)
                     }
                 })
             </script>
         </div>
+<!--        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg/800px-Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg" alt="img">-->
 
     </div>
 </div>
