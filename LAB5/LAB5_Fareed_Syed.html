@@ -64,9 +64,9 @@
                  height="200" alt="Profile_Picture" class="circular--landscape">
         </div>
     </div>
-    <div class="row my-row justify-content-left">Research Assistant at Ryerson University | Former Intern - Thales,
+    <div class="row my-row justify-content-left"><b>Research Assistant at Ryerson University | Former Intern - Thales,
         Centre for Urban
-        Energy | Mechatronics Engineering Student
+        Energy | Mechatronics Engineering Student</b>
 
     </div>
 </div>
@@ -203,8 +203,9 @@
     </div>
     <div class="row">
         <div class="col" id="lab_json">
-            <b>Loading content as JSON object used from the LAB_5 manual. Later, the following content will be
-            changed to reflect to developers profile.</b><br>
+            <b>Loading content as JSON object used from the LAB_5 manual.
+                <br>Later, the following content will be
+                changed to reflect to developers profile.</b><br>
             <script type="text/javascript">
                 $.ajax({
                     type: "GET",
@@ -212,7 +213,7 @@
                     success: function (response) {
                         // console.log(response);
                         $("#lab_json").append(
-                            "<br><img src="+ response.imageURL+" /><br>" +
+                            "<br><img src=" + response.imageURL + " /><br>" +
                             "<br><b>Name: </b>" + response.name +
                             "<br><b>Year: </b>" + response.year +
                             "<br><b>Engine: </b>" +
@@ -226,7 +227,7 @@
                 })
             </script>
         </div>
-<!--        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg/800px-Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg" alt="img">-->
+        <!--        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg/800px-Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg" alt="img">-->
 
     </div>
 </div>
