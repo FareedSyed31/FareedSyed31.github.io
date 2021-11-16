@@ -1,3 +1,4 @@
+
 var express = require('express');
 var app = express();
 
@@ -5,6 +6,7 @@ app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({     // to support URL-encoded bodies
     extended: false
 }));
+app.use(express.static('main.css'));
 
 var books =
     [
@@ -82,6 +84,5 @@ app.post('/bookinventory/addbooks', function (req, res) {
 
     res.send('New book is added!<br><br><a href="/bookinventory/list">List of books.</a>');
 });
-
 
 app.listen(3000);
