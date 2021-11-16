@@ -1,14 +1,23 @@
-{
-  "name": "Mercedes-Benz SLS AMG",
-  "year": 2011,
-  "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg/800px-Mercedes-Benz_SLS_AMG_%28C_197%29_%E2%80%93_Frontansicht_ge%C3%B6ffnet%2C_10._August_2011%2C_D%C3%BCsseldorf.jpg",
-  "engine": {
-    "type": "M156 E63",
-    "size": "6208 cc",
-    "configuration": "V8"
+[
+  {
+    "title": "The Lightning Thief",
+    "author": "Rick Riordan",
+    "publisher": "Disney-Hyperion",
+    "date": "April 1, 2006",
+    "website": "https://www.chapters.indigo.ca/en-ca/books/percy-jackson-and-the-olympians/9780786838653-item.html?ikwid=percy+jackson&ikwsec=Home&ikwidx=1#algoliaQueryId=781379904bd126c59b4e59951e06f777"
   },
-  "brakes": {
-    "front": "360 mm" ,
-    "Back": "340 mm"
+  {
+    "title": "The Sea of Monsters",
+    "author": "Rick Riordan",
+    "publisher": "Disney-Hyperion",
+    "date": "April 1, 2007",
+    "website": "https://www.chapters.indigo.ca/en-ca/books/percy-jackson-and-the-olympians/9781423103349-item.html?ref=item_page:series:Percy%20Jackson%20And%20The%20Olympians,%20Book%20Two%20The%20Sea%20Of%20Monsters%20(percy%20Jackson%20And%20The%20Olympians,%20Book%20Two):%20Percy%20Jackson%20&%20the%20Olympians%20Book%20Two"
+  },
+  {
+    "title": "Red Rising",
+    "author": "Pierce Brown",
+    "publisher": "Random House Publishing Group",
+    "date": "July 15, 2014",
+    "website": "https://www.chapters.indigo.ca/en-ca/books/percy-jackson-and-the-olympians/9781423103349-item.html?ref=item_page:series:Percy%20Jackson%20And%20The%20Olympians,%20Book%20Two%20The%20Sea%20Of%20Monsters%20(percy%20Jackson%20And%20The%20Olympians,%20Book%20Two):%20Percy%20Jackson%20&%20the%20Olympians%20Book%20Two"
   }
-}
+] 
