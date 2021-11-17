@@ -1,4 +1,3 @@
-
 var express = require('express');
 var app = express();
 
@@ -27,7 +26,7 @@ var books =
         {
             "title": "Will",
             "author": "Will Smith",
-            "publisher": "Random House Publishing Group",
+            "publisher": "Penguin Publishing Group",
             "date": "November 9, 2021",
             "website": "https://www.chapters.indigo.ca/en-ca/books/will/9781984877925-item.html?ref=shop%3abooks%3abooks-main%3abuzzworthy-books%3a1%3a"
         }
@@ -41,7 +40,7 @@ app.get('/bookinventory/list', function (req, res) {
         html = html + '<b>Author: </b>' + books[i].author + '<br>';
         html = html + '<b>Publisher: </b>' + books[i].publisher + '<br>';
         html = html + '<b>Date: </b>' + books[i].date + '<br>';
-        html = html + '<b>Website: </b>' +  books[i].website  + '<br><br>';
+        html = html + '<b>Website: </b>' + books[i].website + '<br><br>';
     }
     html += '</p>'
     // res.send('')
