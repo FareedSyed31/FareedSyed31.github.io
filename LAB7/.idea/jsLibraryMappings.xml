@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/back_end.js" libraries="{Nashorn}" />
+    <file url="PROJECT" libraries="{@types/jquery, @types/json-js, @types/json-schema, @types/mongodb-queue, @types/mongodb-uri}" />
+  </component>
+</project>

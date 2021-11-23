@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@types/jquery" level="application" />
+    <orderEntry type="library" name="@types/json-js" level="application" />
+    <orderEntry type="library" name="@types/json-schema" level="application" />
+    <orderEntry type="library" name="@types/mongodb-queue" level="application" />
+    <orderEntry type="library" name="@types/mongodb-uri" level="application" />
+  </component>
+</module>
