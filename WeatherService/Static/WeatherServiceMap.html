@@ -1,13 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-compatible" content="ie=edge">
-    <title>Openweathermap</title>
+    <title>Weather Map</title>
 
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css"/>
     <style>
@@ -32,14 +31,27 @@
             z-index: -2;
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 
 <body>
-<ul class="nav justify-content-center" style="margin-left: 30%; margin-right: 30%; margin-top: 20px; font-size: x-large">
+<ul class="nav justify-content-center"
+    style="margin-left: 30%; margin-right: 30%; margin-top: 20px; font-size: x-large">
     <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/weathermap">Weather Map</a>
     </li>
@@ -61,6 +73,8 @@
 <!-- custom script!-->
 <script>
     //MAP
+    var L = window.L;
+
     var mymap = L.map('map', {
         center: [48.7, 11.5],
         zoom: 6,
@@ -73,6 +87,27 @@
             attribution: '&copy; <a href="http://osm.org/copyright" target = "_blank">OpenStreetMap</a> contributors'
         }).addTo(mymap);
 
+    //Search layer on Map
+    // Control 1: This add the OpenStreetMap background tile
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mymap);
+
+
+    // Control 2: This add a scale to the map
+    L.control.scale().addTo(mymap);
+
+    // Control 3: This add a Search bar
+    var searchControl = new L.esri.Controls.Geosearch().addTo(mymap);
+
+    var results = new L.LayerGroup().addTo(mymap);
+
+    searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+            results.addLayer(L.marker(data.results[i].latlng));
+        }
+    });
 
     var popup = L.popup();
 
@@ -166,7 +201,17 @@
 
 //Popup with content
                     var fontsizesmall = 1;
-                    popup.setContent("Weatherdata:<br>" + "<img src=" + weathercondtioniconhtml + "><br>" + weatherconditionstring + " (Weather-ID: " + weatherconditionid + "): " + weatherconditiondescription + "<br><br>Temperature: " + temperaturecelsius + "°C<br>Airpressure: " + airpressure + " hPa<br>Humidityt: " + airhumidity + "%" + "<br>Cloudcoverage: " + cloudcoverage + "%<br><br>Windspeed: " + windspeedkmh + " km/h<br>Wind from direction: " + winddirectionstring + " (" + winddirection + "°)" + "<br><br><font size=" + fontsizesmall + ">Datasource:<br>openweathermap.org<br>Measure time: " + weathertimenormal + "<br>Weatherstation: " + weatherstationname + "<br>Weatherstation-ID: " + weatherstationid + "<br>Weatherstation Coordinates: " + weatherlocation_lon + ", " + weatherlocation_lat);
+                    popup.setContent(
+                        "Weatherdata:<br>" + "<img src=" + weathercondtioniconhtml + "><br>" +
+                        weatherconditionstring + " (Weather-ID: " + weatherconditionid + "): " +
+                        weatherconditiondescription + "<br><br>Temperature: " + temperaturecelsius +
+                        "°C<br>Airpressure: " + airpressure + " hPa<br>Humidityt: " + airhumidity + "%" +
+                        "<br>Cloudcoverage: " + cloudcoverage + "%<br><br>Windspeed: " + windspeedkmh +
+                        " km/h<br>Wind from direction: " + winddirectionstring + " (" + winddirection + "°)" +
+                        "<br><br><font size=" + fontsizesmall + ">Datasource:<br>openweathermap.org<br>Measure time: " +
+                        weathertimenormal + "<br>Weatherstation: " + weatherstationname + "<br>Weatherstation-ID: " +
+                        weatherstationid + "<br>Weatherstation Coordinates: " + weatherlocation_lon + ", " +
+                        weatherlocation_lat);
 
 
                 },
