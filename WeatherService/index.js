@@ -3,6 +3,8 @@ var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb+srv://ryerson:123456a@chatapp.pllqz.mongodb.net/WeatherMapDB?retryWrites=true&w=majority"
 var alert = require("alert");
+let ejs = require('ejs');
+let fs = require('fs')
 
 var app = express();
 
@@ -11,6 +13,12 @@ app.use(express.static('Static'));
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+app.set('view engine', 'html');
+
+app.get('/weathermap', function (req, res) {
+    return res.redirect('WeatherServiceMap.html')
+})
+
 
 app.post("/weathermap", function (req, res) {
     var email = req.body.email;
@@ -63,26 +71,20 @@ app.post("/login", function (req, res) {
 
             if (result.length === 0) {
                 console.log("User not found. Please signup.");
-                // popup.window({
-                //     content: "User not found. Please signup"
-                // })
-                // alert("User not found. Please signup");
-                return res.redirect('signup.html');
-                // res.render('index.html',{error:'Username not found!'})
+                res.redirect('/usernotfound');
+
             } else {
                 console.log("Logged in Successfully!");
-                // alert("Logged in Successfully!");
                 return res.redirect('WeatherServiceMap.html');
             }
-
         });
     });
 })
 
-app.get('/weathermap', function (req, res) {
-    return res.redirect('WeatherServiceMap.html')
+app.get('/login', function (req, res) {
+    res.render('index', {message: 'User not found'});
+    // res.send('Username not found!')
 })
-
 
 app.get('/', function (req, res) {
     return res.redirect('index.html');
@@ -94,6 +96,11 @@ app.get('/signup', function (req, res) {
 
 app.get('/home', function (req, res) {
     return res.redirect('Home.html');
+})
+
+app.get('/usernotfound', function (req, res) {
+    res.send('<p><b style="color: red">Error 404: </b>Username or Password not found!<br>' +
+        '<a style="color: blue" href="/signup">Please Signup</a></p>')
 })
 
 
