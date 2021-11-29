@@ -1,52 +1,55 @@
-var express = require('express');
+var express = require("express");
 var app = express();
+
+var MongoClient = require("mongodb").MongoClient;
+var url = "mongodb+srv://ryerson:123456a@chatapp.pllqz.mongodb.net/WeatherMapDB?retryWrites=true&w=majority"
 
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({     // to support URL-encoded bodies
     extended: false
 }));
-app.use(express.static('main.css'));
+app.use(express.static('Static'));
 
-var books =
-    [
-        {
-            "title": "A Promised Land",
-            "author": "Barack Obama",
-            "publisher": "Crown",
-            "date": "November 17, 2020",
-            "website": "https://www.chapters.indigo.ca/en-ca/books/a-promised-land/9781524763169-item.html?ikwid=obama&ikwsec=Home&ikwidx=1#algoliaQueryId=25558a99d98968a203953344c6a079d8"
-        },
-        {
-            "title": "An Astronaut's Guide To Life On Earth",
-            "author": "Chris Hadfield",
-            "publisher": "Random House of Canada",
-            "date": "September 1, 2015",
-            "website": "https://www.chapters.indigo.ca/en-ca/books/an-astronauts-guide-to-life/9780345812711-item.html?ikwid=chris+hadfield&ikwsec=Home&ikwidx=2#algoliaQueryId=cab8339a71c0681f35987cefebb26de8"
-        },
-        {
-            "title": "Will",
-            "author": "Will Smith",
-            "publisher": "Penguin Publishing Group",
-            "date": "November 9, 2021",
-            "website": "https://www.chapters.indigo.ca/en-ca/books/will/9781984877925-item.html?ref=shop%3abooks%3abooks-main%3abuzzworthy-books%3a1%3a"
-        }
-    ]
+app.get('/', function (req, res) {
+    res.write("<h1>Welcome to LAB8</h1>");
+    res.write("<h1>Fareed Syed</h1>");
+    res.write("<a style='color: blue' href=\"/bookinventory/list\">Inventory List</a><br>");
+    res.write("<a style='color: blue' href=\"/bookinventory/add\">Add book</a><br>");
+    res.end();
+})
 
 app.get('/bookinventory/list', function (req, res) {
 
-    var html = '<p>'
-    for (var i = 0; i < books.length; i++) {
-        html = html + '<b>Title: </b>' + books[i].title + '<br>';
-        html = html + '<b>Author: </b>' + books[i].author + '<br>';
-        html = html + '<b>Publisher: </b>' + books[i].publisher + '<br>';
-        html = html + '<b>Date: </b>' + books[i].date + '<br>';
-        html = html + '<b>Website: </b>' + books[i].website + '<br><br>';
-    }
-    html += '</p>'
-    // res.send('')
-    res.send('<h1>Fareed Syed: LAB6</h1><h2>List of Books: </h2>' + html);
-});
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
 
+
+        db.on('error', () => console.log("Error in connecting to the Database."));
+        db.once('open', () => console.log("Connected to the Database!"));
+
+        dbo.collection("books").find().toArray(function (err, books) {
+            if (err) throw err;
+
+            if (books.length === 0) {
+                console.log("User not found. Please signup.");
+                res.redirect('/login')
+            } else {
+                console.log("Book Inventory found Successfully!");
+                var html = '<p>'
+                for (var i = 0; i < books.length; i++) {
+                    html = html + '<b>Title: </b>' + books[i].title + '<br>';
+                    html = html + '<b>Author: </b>' + books[i].author + '<br>';
+                    html = html + '<b>Publisher: </b>' + books[i].publisher + '<br>';
+                    html = html + '<b>Date: </b>' + books[i].date + '<br>';
+                    html = html + '<b>Website: </b>' + books[i].website + '<br><br>';
+                }
+                html += '</p>'
+                res.send('<h1>Fareed Syed: LAB8</h1><h2>List of Books: </h2>' + html);
+            }
+        });
+    });
+})
 
 app.get('/bookinventory/add', function (req, res) {
 
@@ -72,16 +75,32 @@ app.post('/bookinventory/addbooks', function (req, res) {
     var new_date = req.body.bdate;
     var new_web = req.body.bweb;
 
-    var new_json = {
-        'title': new_title,
-        'author': new_author,
-        'publisher': new_publisher,
-        'date': new_date,
-        'website': new_web
-    };
-    books.push(new_json);
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        var new_json = {
+            'title': new_title,
+            'author': new_author,
+            'publisher': new_publisher,
+            'date': new_date,
+            'website': new_web
+        };
+
+        db.on('error', () => console.log("Error in connecting to the Database."));
+        db.once('open', () => console.log("Connected to the Database!"));
+
+        dbo.collection('books').insertOne(new_json, function (err, collection) {
+            if (err) throw err;
+            console.log("Book Added Successfully!")
+            db.close();
+        });
+    });
+
+    // books.push(new_json);
 
     res.send('New book is added!<br><br><a href="/bookinventory/list">List of books.</a>');
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+    console.log("Server is working!")
+})
