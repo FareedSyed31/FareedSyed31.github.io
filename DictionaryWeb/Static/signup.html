@@ -23,22 +23,24 @@
 <form action="dictionary" method="POST" class="row g-3" style="margin-left: 40%; margin-right: 40%; margin-top: 10%">
     <div class="col-12">
         <label for="inputfname" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="inputfname" name ="firstName" placeholder="First Name">
+        <input type="text" class="form-control" id="inputfname" name="firstName" placeholder="First Name">
     </div>
     <div class="col-12">
         <label for="inputlname" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="inputlname" name ="lastName" placeholder="Last Name">
+        <input type="text" class="form-control" id="inputlname" name="lastName" placeholder="Last Name">
     </div>
     <div class="col-12">
         <label for="inputEmail" class="form-label">Email</label>
-        <input type="email" class="form-control" id="inputEmail" name ="email" placeholder="Enter Email">
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter Email">
     </div>
     <div class="col-12">
-        <label for="inputPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword" name ="password" placeholder="Enter Password">
+        <label for="inputPassword" class="form-label">Password (8 characters minimum):</label>
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Enter Password"
+               minlength="8" required>
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary">Sign in</button> Already a user, <a href="/">Login?</a>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        Already a user, <a href="/">Login?</a>
     </div>
 
 </form>

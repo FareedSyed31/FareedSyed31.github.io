@@ -5,6 +5,7 @@ var url = "mongodb+srv://ryerson:123456a@chatapp.pllqz.mongodb.net/WeatherMapDB?
 // var alert = require("alert");
 // let ejs = require('ejs');
 // let fs = require('fs')
+var pause = require('pause')
 
 var app = express();
 
@@ -15,11 +16,13 @@ app.use(bodyParser.urlencoded({
 }))
 app.set('view engine', 'html');
 
-// app.get('/dictionary', function (req, res) {
-//     return res.redirect('DictionaryWeb.html')
-// })
+app.get('/dictionary', function (req, res) {
+    return res.redirect('DictionaryWeb.html')
+})
 
 app.post("/defineword", function (req, res) {
+    // pause(1000);
+
     var word = req.body.word;
     var definition = req.body.definition;
     var image = req.body.image;
@@ -49,7 +52,6 @@ app.post("/defineword", function (req, res) {
             }
             else {
                 console.log("Word found in database.");
-                // return res.redirect('DictionaryWeb.html');
             }
         });
 
