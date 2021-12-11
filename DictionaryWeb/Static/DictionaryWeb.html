@@ -43,20 +43,41 @@
 
 <script>
     let findword_btn = document.getElementById("findword");
-    let word = document.getElementById("word")
-    findword_btn.onclick = function () {
 
-        $.ajax({
-            url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word.toString() + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f",
-            dataType: 'json',
-            success: function (data) {
-                // storing json data in variables
-                console.log(data);
-            },
-            error: function () {
-                alert("error receiving word data from merriam-webster");
-            }
-        });
+    findword_btn.onclick = function () {
+        let word = document.getElementById("word").value;
+
+        // var request1 = new XMLHttpRequest();
+        // // request1.open('GET', "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word.toString() + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f")
+        // request1.open('GET', "https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=99ac1d772dec5388da14975073ae0230")
+        //
+        // request1.onload = function () {
+        //     var data = JSON.parse(this.response);
+        //     if (request1.status >= 200 && request1.status < 400) {
+        //         console.log(data);
+        //         document.getElementById("definition").innerHTML = data.toString()
+        //     } else {
+        //         alert("error receiving word data from merriam-webster");
+        //
+        //     }
+        // }
+        // request1.send();
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f",
+                // url: "https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=99ac1d772dec5388da14975073ae0230",
+                dataType: 'json',
+                success: function (data) {
+                    // storing json data in variables
+                    console.log(data);
+                },
+                error: function () {
+                    alert("error receiving word data from merriam-webster");
+                    console.log(word.toString());
+                }
+            });
+        })
 
     }
 </script>
