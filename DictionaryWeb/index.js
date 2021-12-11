@@ -5,58 +5,59 @@ var url = "mongodb+srv://ryerson:123456a@chatapp.pllqz.mongodb.net/WeatherMapDB?
 // var alert = require("alert");
 // let ejs = require('ejs');
 // let fs = require('fs')
-var pause = require('pause')
+var pause = require('./pause')
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(express.static('Static'));
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }))
 app.set('view engine', 'html');
+// app.use(function(req,res,next){setTimeout(next,1000)});
 
 app.get('/dictionary', function (req, res) {
     return res.redirect('DictionaryWeb.html')
 })
 
 app.post("/defineword", function (req, res) {
-    // pause(1000);
+    pause(3000)
+        .then(function () {
+            var word = req.body.word;
+            var definition = req.body.definition;
+            var image = req.body.image;
 
-    var word = req.body.word;
-    var definition = req.body.definition;
-    var image = req.body.image;
+            MongoClient.connect(url, function (err, db) {
+                if (err) throw err;
+                var dbo = db.db("DictionaryDB");
+                var word_def = {
+                    "word": word,
+                    "definition": definition,
+                    "image": image,
+                }
 
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db("DictionaryDB");
-        var word_def = {
-            "word": word,
-            "definition": definition,
-            "image": image,
-        }
+                db.on('error', () => console.log("Error in connecting to the Database."));
+                db.once('open', () => console.log("Connected to the Database!"));
 
-        db.on('error', () => console.log("Error in connecting to the Database."));
-        db.once('open', () => console.log("Connected to the Database!"));
-
-        dbo.collection("definitions").find(word_def).toArray(function (err, result) {
-            if (err) throw err;
-
-            if (result.length === 0) {
-                console.log("Word not found. Recording word to database.");
-                dbo.collection('definitions').insertOne(word_def, function (err, collection) {
+                dbo.collection("definitions").find(word_def).toArray(function (err, result) {
                     if (err) throw err;
-                    console.log("Word definition Record Inserted Successfully!")
-                    db.close();
+
+                    if (result.length === 0) {
+                        console.log("Word not found. Recording word to database.");
+                        dbo.collection('definitions').insertOne(word_def, function (err, collection) {
+                            if (err) throw err;
+                            console.log("Word definition Record Inserted Successfully!")
+                            db.close();
+                        });
+                    } else {
+                        console.log("Word found in database.");
+                    }
                 });
-            }
-            else {
-                console.log("Word found in database.");
-            }
-        });
 
 
-    });
+            });
+        })
 
 
 })
