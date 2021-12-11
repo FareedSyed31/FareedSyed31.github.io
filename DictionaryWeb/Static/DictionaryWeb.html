@@ -22,7 +22,7 @@
     </li>
 </ul>
 
-<form action="defineword" method="POST" class="row g-3" style="margin-left: 40%; margin-right: 40%; margin-top: 5%">
+<form action="defineword" method="post" class="row g-3" style="margin-left: 40%; margin-right: 40%; margin-top: 5%">
     <div class="col-12">
         <label for="word" class="form-label">Enter a word:</label>
         <input type="text" class="form-control" id="word" name="word" placeholder="Enter a word">
@@ -44,24 +44,31 @@
 <script>
     let findword_btn = document.getElementById("findword");
 
+
     findword_btn.onclick = function () {
         let word = document.getElementById("word").value;
 
         // var request1 = new XMLHttpRequest();
-        // // request1.open('GET', "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word.toString() + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f")
-        // request1.open('GET', "https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=99ac1d772dec5388da14975073ae0230")
+        // request1.open('GET', "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word.toString() + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f")
+        // // request1.open('GET', "https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=99ac1d772dec5388da14975073ae0230", true)
         //
         // request1.onload = function () {
-        //     var data = JSON.parse(this.response);
+        //     // let type = request1.responseText
+        //     data = request1.response
+        //     // let data = JSON.stringify(request1.responseText);
+        //     // console.log(JSON.parse(data));
+        //     console.log(typeof data)
+        //     // console.log(JSON.parse('{'+data+'}'))
         //     if (request1.status >= 200 && request1.status < 400) {
-        //         console.log(data);
-        //         document.getElementById("definition").innerHTML = data.toString()
+        //         // console.log(data);
+        //         document.getElementById("definition").innerHTML = JSON.parse(data[0].def[0].sseq[0][0][1].dt)
         //     } else {
         //         alert("error receiving word data from merriam-webster");
         //
         //     }
         // }
         // request1.send();
+
 
         $(document).ready(function () {
             $.ajax({
@@ -70,7 +77,11 @@
                 dataType: 'json',
                 success: function (data) {
                     // storing json data in variables
-                    console.log(data);
+                    let stringData = JSON.stringify(data)
+                    // console.log(JSON.parse(data))
+                    console.log(typeof data)
+                    console.log(data[0].def[0].sseq[0][0][1].dt[0][1]);
+                    $('#definition').innerHTML = JSON.stringify(data[0].def[0].sseq[0][0][1].dt)
                 },
                 error: function () {
                     alert("error receiving word data from merriam-webster");
