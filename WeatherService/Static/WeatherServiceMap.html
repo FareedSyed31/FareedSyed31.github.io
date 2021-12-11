@@ -121,6 +121,8 @@
                 dataType: 'json',
                 success: function (data) {
                     // storing json data in variables
+                    console.log(data);
+
                     weatherlocation_lon = data.coord.lon; // lon WGS84
                     weatherlocation_lat = data.coord.lat; // lat WGS84
                     weatherstationname = data.name // Name of Weatherstation

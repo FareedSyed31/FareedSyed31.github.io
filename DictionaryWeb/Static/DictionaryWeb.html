@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-compatible" content="ie=edge">
     <title>Weather Map</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 
@@ -41,25 +42,22 @@
 
 
 <script>
-    let findword = document.getElementById("findWord");
+    let findword_btn = document.getElementById("findword");
     let word = document.getElementById("word")
-    findword.onclick = function () {
+    findword_btn.onclick = function () {
 
-        $(document).ready(function () {
-            $.ajax({
-                url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f",
-                dataType: 'json',
-                success: function (data) {
-                    // storing json data in variables
-                    var definition = data.def.sseq[1][1].dt[1];
-
-                    findword.innerHTML = definition;
-                },
-                error: function () {
-                    alert("error receiving word data from merriam-webster");
-                }
-            });
+        $.ajax({
+            url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word.toString() + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f",
+            dataType: 'json',
+            success: function (data) {
+                // storing json data in variables
+                console.log(data);
+            },
+            error: function () {
+                alert("error receiving word data from merriam-webster");
+            }
         });
+
     }
 </script>
 <br>

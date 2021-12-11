@@ -36,7 +36,7 @@ app.post("/defineword", function (req, res) {
         db.on('error', () => console.log("Error in connecting to the Database."));
         db.once('open', () => console.log("Connected to the Database!"));
 
-        dbo.collection("users").find(word_def).toArray(function (err, result) {
+        dbo.collection("definitions").find(word_def).toArray(function (err, result) {
             if (err) throw err;
 
             if (result.length === 0) {
