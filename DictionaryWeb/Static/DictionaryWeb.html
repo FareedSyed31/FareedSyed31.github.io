@@ -15,79 +15,34 @@
 <ul class="nav justify-content-center"
     style="margin-left: 30%; margin-right: 30%; margin-top: 20px; font-size: x-large">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/dictionary">Word Dictionary</a>
+        <a class="nav-link active" aria-current="page" href="/defineword">Word Dictionary</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/">Logout</a>
     </li>
 </ul>
 
-<form action="defineword" method="post" class="row g-3" style="margin-left: 40%; margin-right: 40%; margin-top: 5%" id="dictionaryForm">
+<form action="defineword" method="post" class="row g-3" style="margin-left: 40%; margin-right: 40%; margin-top: 0.5%"
+      id="dictionaryForm">
     <div class="col-12">
         <label for="word" class="form-label">Enter a word:</label>
-        <input type="text" class="form-control" id="word" name="word" placeholder="Enter a word">
+        <input type="text" class="form-control" id="word" name="word" placeholder="Enter a word" required>
     </div>
     <div class="col-12">
         <button id="findword" type="submit" class="btn btn-primary">Search</button>
     </div>
+    <br><br><br>
     <div class="-12">
         <b id="definition_heading"></b>
-        <p id="definition" name="definition"></p>
-        <!--        <br>-->
+        <output id="definition" name="definition"></output>
+        <br>
+        <br>
         <b id="illustration_heading"></b>
         <p><img id="illustration"></img></p>
+
     </div>
-
 </form>
-
-
-<script>
-    let findword_btn = document.getElementById("findword");
-
-
-    findword_btn.onclick = function () {
-        let word = document.getElementById("word").value;
-
-        var request1 = new XMLHttpRequest();
-        request1.open('GET', "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word.toString() + "?key=f25f4086-c864-4fb8-8009-8e55a75cf65f")
-
-        request1.onload = function () {
-            // let type = request1.responseText
-            data = JSON.parse(request1.responseText)
-
-            // console.log(JSON.parse('{'+data+'}'))
-                if (request1.status >= 200 && request1.status < 400) {
-                data_keys = Object.keys(data[0])
-                console.log(data_keys)
-                // if (data_keys.includes())
-
-                definition = data[0].def[0].sseq[0][1][1].dt[0][1]
-                console.log(definition);
-                document.getElementById("definition_heading").innerHTML = "Definition:"
-                document.getElementById("definition").innerHTML = definition
-                data_keys = Object.keys(data[0])
-                console.log(data_keys)
-                document.getElementById("illustration_heading").innerHTML = "Illustration:"
-                if (data_keys.includes("art")) {
-                    imageid = data[0].art.artid
-                    console.log(imageid)
-                    caption = data[0].art.capt
-                    console.log(caption)
-                    document.getElementById("illustration").src = "https://www.merriam-webster.com/assets/mw/static/art/dict/" + imageid + ".gif"
-                } else {
-                    document.getElementById("illustration").src = "https://i.imgur.com/D1nM11A.png"
-                }
-            } else {
-                alert("error receiving word data from merriam-webster");
-
-            }
-        }
-        // request1.send();
-        request1.send()
-    }
-</script>
 <br>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
