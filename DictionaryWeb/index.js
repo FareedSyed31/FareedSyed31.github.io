@@ -95,7 +95,7 @@ app.post("/defineword", function (req, res) {
                                     image = r[0].image
 
                                     let unix = new moment().valueOf();
-                                    dbo.collection("definition").createIndex({expireAt: unix}, {expireAfterSeconds: 0}, function(error, indexName){
+                                    dbo.collection("definitions").createIndex({expireAt: unix}, {expireAfterSeconds: 0}, function(error, indexName){
                                         if(error) console.log(error);
                                         console.log(indexName);
                                     });
