@@ -4,8 +4,6 @@ var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb+srv://ryerson:123456a@chatapp.pllqz.mongodb.net/WeatherMapDB?retryWrites=true&w=majority"
 var https = require('https')
 var moment = require('moment')
-// let ejs = require('ejs');
-// var pause = require('./pause')
 
 var app = express();
 
@@ -39,8 +37,6 @@ app.post("/defineword", function (req, res) {
 
         db.on('error', () => console.log("Error in connecting to the Database."));
         db.once('open', () => console.log("Connected to the Database!"));
-
-
 
         dbo.collection("definitions").find(word_def).toArray(function (err, result) {
             if (err) throw err;
