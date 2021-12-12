@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb+srv://ryerson:123456a@chatapp.pllqz.mongodb.net/WeatherMapDB?retryWrites=true&w=majority"
 var https = require('https')
-
+var moment = require('moment')
 // let ejs = require('ejs');
 // var pause = require('./pause')
 
@@ -39,7 +39,7 @@ app.post("/defineword", function (req, res) {
 
         db.on('error', () => console.log("Error in connecting to the Database."));
         db.once('open', () => console.log("Connected to the Database!"));
-        dbo.collection("definitions").createIndex({expireAfterSeconds: 5000});
+
 
 
         dbo.collection("definitions").find(word_def).toArray(function (err, result) {
@@ -78,6 +78,7 @@ app.post("/defineword", function (req, res) {
                             "word": word,
                             "definition": def,
                             "image": image,
+                            "expireAt": moment().add(1, 'minutes').toDate(),
                         }
 
                         dbo.collection('definitions').insertOne(word_def, function (err, collection) {
@@ -92,6 +93,12 @@ app.post("/defineword", function (req, res) {
                                 } else {
                                     def = r[0].definition
                                     image = r[0].image
+
+                                    let unix = new moment().valueOf();
+                                    dbo.collection("definition").createIndex({expireAt: unix}, {expireAfterSeconds: 0}, function(error, indexName){
+                                        if(error) console.log(error);
+                                        console.log(indexName);
+                                    });
 
                                     var html = '<head>\n' +
                                         '    <meta charset="UTF-8">\n' +
