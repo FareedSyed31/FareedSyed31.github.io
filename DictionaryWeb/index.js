@@ -78,7 +78,7 @@ app.post("/defineword", function (req, res) {
                             "word": word,
                             "definition": def,
                             "image": image,
-                            "expireAt": moment().add(1, 'minutes').toDate(),
+                            "expireAt": moment().add(10, 'minutes').toDate(),
                         }
 
                         dbo.collection('definitions').insertOne(word_def, function (err, collection) {
@@ -89,7 +89,7 @@ app.post("/defineword", function (req, res) {
                                 if (e) throw err;
 
                                 if (r.length === 0) {
-                                    console.log("definiton not found")
+                                    console.log("Definiton not found")
                                 } else {
                                     def = r[0].definition
                                     image = r[0].image
